@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchQuiz, postAnswer, selectAnswer } from '../state/action-creators'
+import { fetchQuiz, postAnswer, selectAnswer, setMessage } from '../state/action-creators'
 
 export default function Quiz() {
   const state = useSelector((appState) => appState.quiz)
@@ -18,6 +18,7 @@ export default function Quiz() {
   const handleAnswerSelection = (event, answerId) => {
         event.preventDefault()
         dispatcher(selectAnswer(answerId))
+        dispatcher(setMessage())
   }
   return (
     <div id="wrapper">

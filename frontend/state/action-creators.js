@@ -22,7 +22,9 @@ export function setQuiz(payload=null) {
   return {type: actions.SET_QUIZ_INTO_STATE, payload}
 }
 
-export function inputChange() { }
+export function inputChange(questionData) { 
+  return {type: actions.RESET_FORM}
+}
 
 export function resetForm() { }
 
@@ -58,11 +60,21 @@ export function postAnswer(data) {
     // - Dispatch the fetching of the next quiz
   }
 }
-export function postQuiz() {
+export function postQuiz(quizData) {
   return function (dispatch) {
+    axios.post('http://localhost:9000/api/quiz/new', quizData).then( (response) => {
+      if(response.status == 200){
+        console.log(response.status, response.data)
+        dispatch(setMessage(response.data.message))
+        dispatch(resetForm())
+      }
+
+    })
+
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
+    
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
