@@ -12,7 +12,9 @@ export default function Quiz() {
   }
   
   useEffect( ()=> {
-    dispatcher(fetchQuiz())
+    if(!state){
+      dispatcher(fetchQuiz())
+    }  
   }, [])
   
   const handleAnswerSelection = (event, answerId) => {
